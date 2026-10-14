@@ -1,0 +1,26 @@
+# Build output
+dist/
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# IDE and editor files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# Local agent/environment configs
+.env
+.env.*
+
+# Scratch working directories
+.tmp/
+*.tgz
+
+# OS files
+.DS_Store
+Thumbs.db

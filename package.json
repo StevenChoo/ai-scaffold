@@ -1,0 +1,60 @@
+{
+  "name": "@stevenchoo/ai-scaffold",
+  "version": "0.7.0",
+  "description": "Scaffold a repository with agent-facing structure: an AI folder, indexed navigation, curated context, and reusable skills.",
+  "keywords": [
+    "ai",
+    "agents",
+    "scaffold",
+    "agents-md",
+    "claude-code",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=22.13",
+    "pnpm": ">=10"
+  },
+  "bin": {
+    "ai-scaffold": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "!dist/**/*.test.*",
+    "providers.json",
+    "templates",
+    "vendor"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StevenChoo/ai-scaffold.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/cli.js",
+    "test": "tsc && node --test dist/**/*.test.js",
+    "check": "tsc --noEmit",
+    "vendor": "tsc && node dist/providers/vendor-cli.js",
+    "vendor:check": "tsc && node dist/providers/vendor-cli.js --check",
+    "vendor:update": "tsc && node dist/providers/vendor-cli.js --update",
+    "vendor:outdated": "tsc && node dist/providers/vendor-cli.js --outdated",
+    "fmt:md": "prettier --write \"**/*.md\"",
+    "fmt:md:check": "prettier --check \"**/*.md\""
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "prettier": "^3.9.7",
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0",
+    "yaml": "^2.9.1"
+  }
+}

@@ -1,0 +1,12 @@
+# Other people's files: a vendored copy must match its upstream pin, which reformatting breaks.
+vendor/
+
+# Guarded prose: Prettier puts a blank line after an HTML comment, which separates a guard
+# from the block it governs. The payload is machine-read, not prose anyone reads unrendered.
+/templates/
+
+node_modules/
+dist/
+.pnpm-store/
+.tmp/
+pnpm-lock.yaml

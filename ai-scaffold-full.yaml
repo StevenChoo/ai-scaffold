@@ -1,0 +1,110 @@
+# Every setting `ai-scaffold init` accepts in a config file, with the shipped choices spelled out.
+#
+# Copy this next to the repository you are scaffolding, rename it to `ai-scaffold.yaml`, and
+# delete what you do not care about: a key left out is a question that still gets asked, which
+# is usually what you want for the parts that differ per project.
+#
+# A flag always beats this file, and an unknown key is an error rather than a setting that
+# quietly does nothing.
+
+# Name of the agent resources folder. Any directory name without a slash.
+folder: .ai
+
+# The opening description written into context/project.md. Block scalars keep their line
+# breaks, which is the reason this file is YAML.
+about: |
+  What this project is, in a sentence or two.
+
+  A second paragraph, for the part a newcomer always asks about.
+
+# The Constraints section of context/environment.md: what is deliberately unavailable in this
+# project, and what to use instead. Project policy only — what one machine has installed goes in
+# context/environment.local.md, which is never committed.
+environment: |
+  No Docker; test services already run on the host.
+  Never install a package globally.
+
+# Folders to scaffold under the AI folder. The full set is listed here; drop the ones you do
+# not want, or write `[]` for a bare AGENTS.md with no tree at all.
+folders:
+  - commands # how this project's commands must be invoked; offered, not selected by default
+  - context # durable facts: what this is, who it serves, what surrounds it
+  - environments # one committed profile per machine setup; offered, not selected by default
+  - handoffs # the state of work in progress; offered, not selected by default
+  - prompts # reusable task prompts
+  - research # dated surveys written before a decision; offered, not selected by default
+  - skills # workflow guidance, loaded when a task matches
+  - specs # what the project is supposed to do; offered, not selected by default
+  - templates # human-owned templates for context, skills, prompts, and indexes
+
+# Skills to install. The first three ship with this tool; the rest are other people's work,
+# vendored with their licence, and are installed only when named here.
+skills:
+  - adding-commands # recording how a project command must be invoked (needs the commands folder)
+  - adding-context # organising curated context documents
+  - design # turning research or a request into an approved spec
+  - git-flow # committing, branching, commit hygiene
+  - handoff # writing and resuming a handoff (needs the handoffs folder)
+  - implement # building an approved spec one task at a time
+  - migrate-specs-to-openspec # converting the spec tree to OpenSpec (needs the specs folder)
+  - migrate-specs-to-spec-kit # converting the spec tree to Spec Kit (needs the specs folder)
+  - migrate-specs-from-openspec # importing an OpenSpec tree and grouping it (needs the specs folder)
+  - migrate-specs-from-spec-kit # importing Spec Kit feature folders and grouping them (needs the specs folder)
+  - research # surveying options into a dated research document
+  - writing-project-docs # writing and reviewing Markdown in docs/ and the AI folder
+  - documentation-and-adrs # architecture decision records
+  - humanizer # removes AI-sounding prose
+  - i-have-adhd # direct, action-first answers
+  - simple-english # plain technical English
+
+# Installed skills that load in every session: CLAUDE.md imports them and AGENTS.md names them.
+# Every name here must also appear under skills. They are paid for in every session, so keep the
+# list to skills about how to answer rather than how to carry out one kind of task.
+autoload: []
+
+# Tools to install. `ponytail` is vendored files; `rtk` is a program you install yourself, and
+# choosing it installs only the skill recording how this project uses it.
+tools:
+  - ponytail # writes less code
+  - rtk # shrinks command output
+
+# Extra skills a selected tool bundles beyond its core. Rejected unless the tool is selected.
+extras:
+  - ponytail-review # flags over-engineering in a diff
+  - ponytail-audit # audits a whole repository
+  - ponytail-debt # catalogues deferred shortcuts
+  - ponytail-gain # reports what was not written
+  - ponytail-help # explains the other commands
+
+# Options the selected skills offer. Every option is off unless it is named here.
+options:
+  - project-prefixes # git-flow: keep chore/fix/feature instead of Conventional Commits
+  - agent-info # git-flow: name the agent in the commit, with a Co-Authored-By trailer
+  - no-gpg-sign # git-flow: commit with --no-gpg-sign, for a machine with no signing key
+  - uv-formatter # writing-project-docs: format Markdown with uvx mdformat instead of npx prettier
+  - formatter-config # writing-project-docs: write a formatter config inside the AI folder
+
+# How the written Markdown convention says prose should be wrapped: a column count of 40 or
+# more, or `no-reflow` for one line per paragraph. Either way the convention names a formatter
+# command, because widths are counted rather than estimated.
+wrap: 160
+
+# Add the AI folder to .gitignore, keeping handoffs, specs and research off every other machine.
+# Off by default: the folder holds the material a cleared session and a second machine need.
+gitignore: false
+
+# Record the ai-scaffold version in .ai-scaffold.version inside the AI folder. Only a first
+# scaffold or a fresh one writes it; an update never dates an older tree as current.
+track-version: true
+
+# Write a CLAUDE.md that points at AGENTS.md.
+claude-md: true
+
+# What to do when the target already carries agent tooling: `update` adds only what is missing,
+# `fresh` replaces every file the scaffold ships. Leave it out to be asked.
+mode: update
+
+# With mode: fresh over an existing setup, copy it into .scaffold-backup inside the AI folder first,
+# and add AGENT_AISCAFFOLD_MIGRATE_INSTRUCTIONS.md telling an agent how to migrate it.
+backup: true
+migrate-instructions: true

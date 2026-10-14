@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-checks:
+    name: Quality Checks (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22, 24]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check
+        run: pnpm check
+
+      - name: Build
+        run: pnpm build
+
+      - name: Run test suite
+        run: pnpm test
+
+      - name: Verify vendored skills match their pins
+        run: pnpm vendor:check
+
+      - name: Verify package bundle
+        run: pnpm pack --dry-run
+
+  required-checks:
+    name: Required CI Checks
+    needs: [quality-checks]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Verify all checks passed
+        run: |
+          if [ "${{ needs.quality-checks.result }}" != "success" ]; then
+            echo "Quality checks failed: ${{ needs.quality-checks.result }}"
+            exit 1
+          fi
+          echo "All required quality checks passed successfully."

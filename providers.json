@@ -1,0 +1,120 @@
+{
+  "comment": "External skills and tools this scaffold can install. Vendored content under vendor/ is fetched from these pins by scripts/vendor.ts. Edit this file to add a provider; do not edit vendor/ by hand.",
+  "providers": [
+    {
+      "name": "i-have-adhd",
+      "kind": "skill",
+      "summary": "Direct, action-first answers",
+      "author": "Ayoub Ghriss",
+      "license": "MIT",
+      "homepage": "https://github.com/ayghri/i-have-adhd",
+      "source": {
+        "repo": "ayghri/i-have-adhd",
+        "ref": "main",
+        "commit": "cbe69fb83c08a37cf54d5ec9ec6bb88c8bc9973c",
+        "path": "skills/i-have-adhd",
+        "license": "LICENSE"
+      }
+    },
+    {
+      "name": "humanizer",
+      "kind": "skill",
+      "summary": "Removes AI-sounding prose",
+      "author": "Siqi Chen",
+      "license": "MIT",
+      "homepage": "https://github.com/blader/humanizer",
+      "source": {
+        "repo": "blader/humanizer",
+        "ref": "main",
+        "commit": "e2e92e7b4b8229253ed5c8e81dc65463fdeddda5",
+        "path": ".",
+        "license": "LICENSE",
+        "include": [
+          "SKILL.md"
+        ]
+      }
+    },
+    {
+      "name": "simple-english",
+      "kind": "skill",
+      "summary": "Plain technical English",
+      "author": "AminBlg",
+      "license": "MIT",
+      "homepage": "https://github.com/aminblg/simpleenglish",
+      "source": {
+        "repo": "aminblg/simpleenglish",
+        "ref": "main",
+        "commit": "8e8a008a13e4b478f9ccc20ca16e79aef66c0739",
+        "path": "skills/simple-english",
+        "license": "LICENSE"
+      }
+    },
+    {
+      "name": "documentation-and-adrs",
+      "kind": "skill",
+      "summary": "Architecture decision records",
+      "author": "Addy Osmani",
+      "license": "MIT",
+      "homepage": "https://github.com/addyosmani/agent-skills",
+      "source": {
+        "repo": "addyosmani/agent-skills",
+        "ref": "main",
+        "commit": "f63ec56a3cc936408d792956ae583c3c96a825bd",
+        "path": "skills/documentation-and-adrs",
+        "license": "LICENSE"
+      }
+    },
+    {
+      "name": "ponytail",
+      "kind": "tool",
+      "summary": "Writes less code",
+      "author": "DietrichGebert",
+      "license": "MIT",
+      "homepage": "https://github.com/dietrichgebert/ponytail",
+      "source": {
+        "repo": "dietrichgebert/ponytail",
+        "ref": "main",
+        "commit": "2ed6c52c9d7e5e56942508591085fd45dea277d3",
+        "path": "skills/ponytail",
+        "license": "LICENSE"
+      },
+      "extras": [
+        {
+          "name": "ponytail-review",
+          "summary": "Flags over-engineering in a diff",
+          "path": "skills/ponytail-review"
+        },
+        {
+          "name": "ponytail-audit",
+          "summary": "Audits a whole repository",
+          "path": "skills/ponytail-audit"
+        },
+        {
+          "name": "ponytail-debt",
+          "summary": "Catalogues deferred shortcuts",
+          "path": "skills/ponytail-debt"
+        },
+        {
+          "name": "ponytail-gain",
+          "summary": "Reports what was not written",
+          "path": "skills/ponytail-gain"
+        },
+        {
+          "name": "ponytail-help",
+          "summary": "Explains the other commands",
+          "path": "skills/ponytail-help"
+        }
+      ]
+    },
+    {
+      "name": "rtk",
+      "kind": "tool",
+      "summary": "Shrinks command output",
+      "author": "rtk-ai",
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/rtk-ai/rtk",
+      "requiresBinary": "rtk",
+      "installHint": "brew install rtk"
+    }
+  ]
+}
